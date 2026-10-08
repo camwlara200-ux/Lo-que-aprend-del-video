@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lo que aprendí del video: Supabase y su REST API</title>
+  <meta name="description" content="Trabajo práctico: resumen, cuestionario y aplicación práctica del video Supabase, Tutorial Práctico y Overview (REST API) de Fazt Code.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&family=IBM+Plex+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="menu" aria-label="Menú principal">
+  <ul>
+    <li><a href="#introduccion">Introducción</a></li>
+    <li><a href="#conceptos">Conceptos</a></li>
+    <li><a href="#cuestionario">Cuestionario</a></li>
+    <li><a href="#aplicacion">Aplicación práctica</a></li>
+    <li><a href="#recursos">Recursos visuales</a></li>
+    <li><a href="#conclusion">Conclusión</a></li>
+    <li><a href="#fuentes">Fuentes</a></li>
+  </ul>
+</nav>
+
+<header class="hero" id="inicio">
+  <div>
+    <h1>Lo que aprendí del video</h1>
+    <ul class="datos">
+      <li><strong>Estudiante:</strong> Camila Lara </li>
+      <li><strong>Curso y sección:</strong> 2.º 6ta BTI </li>
+      <li><strong>Asignatura:</strong> Software / Desarrollo Web</li>
+      <li><strong>Colegio:</strong> Colegio Nacional EMD Asunción Escalada</li>
+    </ul>
+  </div>
+  <pre class="terminal" aria-label="Ejemplo de petición y respuesta a una API REST"><span class="peticion">GET /rest/v1/products?select=*</span>
+<span class="peticion">apikey: &lt;ANON_KEY&gt;</span>
+
+<span class="respuesta">[
+  { "id": 1, "name": "laptop" },
+  { "id": 2, "name": "monitor" },
+  { "id": 3, "name": "mouse gaming" }
+]</span></pre>
+</header>
+
+<main>
+
+<!-- ============ INTRODUCCIÓN ============ -->
+<section id="introduccion">
+  <h2>Introducción</h2>
+  <p>El video <em>Supabase, Tutorial Práctico y Overview (REST API)</em>, del canal Fazt Code, presenta Supabase como una alternativa a Firebase: un servicio en la nube donde uno crea una cuenta y obtiene un backend con base de datos, autenticación y almacenamiento de archivos, sin escribir código para armarlo.</p>
+  <p>El autor crea un proyecto desde cero, arma una tabla de productos con tres registros (laptop, monitor y mouse gaming) y comprueba que Supabase genera una REST API a partir de esa tabla. Después prueba la API con Postman y explica por qué hace falta activar la seguridad a nivel de fila (RLS). En esta página explico los conceptos, respondo el cuestionario y muestro un ejemplo práctico.</p>
+</section>
+
+<!-- ============ CONCEPTOS ============ -->
+<section id="conceptos">
+  <h2>Conceptos fundamentales</h2>
+  <div class="conceptos">
+    <article class="concepto">
+      <h3>Supabase</h3>
+      <p>Servicio en la nube, alternativa a Firebase, que ofrece base de datos, autenticación y almacenamiento (Storage). Se registra con una cuenta de GitHub y se configura desde un panel web.</p>
+    </article>
+    <article class="concepto">
+      <h3>Base de datos PostgreSQL</h3>
+      <p>A diferencia de Firebase, que usa una base NoSQL, Supabase usa una base SQL (Postgres). Los datos se guardan en tablas con columnas y filas.</p>
+    </article>
+    <article class="concepto">
+      <h3>REST API automática</h3>
+      <p>Cada tabla que se crea genera sus propios endpoints, con documentación incluida. Se basa en PostgREST, y permite leer, escribir, actualizar y eliminar datos mediante peticiones HTTP.</p>
+    </article>
+    <article class="concepto">
+      <h3>API key y cabeceras</h3>
+      <p>Para consultar la API hay que enviar la clave <em>anon public</em> en la cabecera <code>apikey</code> y la misma clave, precedida de <code>Bearer</code>, en la cabecera <code>Authorization</code>. Sin ellas, la API devuelve un error.</p>
+    </article>
+    <article class="concepto">
+      <h3>RLS y políticas</h3>
+      <p>Row Level Security son reglas extra sobre las tablas, parecidas a las Firebase Rules. Con RLS activado y sin políticas, la API devuelve una lista vacía. Con una política se define quién puede hacer cada operación.</p>
+    </article>
+    <article class="concepto">
+      <h3>Biblioteca cliente</h3>
+      <p>Módulo que se instala en la aplicación y hace de intermediario con la REST API, con funciones más simples. En el video está disponible la de JavaScript, y las de Python y Dart estaban en versión alfa y beta.</p>
+    </article>
+  </div>
+</section>
+
+<!-- ============ CUESTIONARIO ============ -->
+<section id="cuestionario">
+  <h2>Cuestionario resuelto</h2>
+  <p>Toca cada pregunta para ver la respuesta.</p>
+
+  <details class="pregunta" open>
+    <summary>1. ¿Cuál es el tema principal del video? Explica de qué trata.</summary>
+    <div class="respuesta-texto">
+      <p>El tema principal es Supabase, una alternativa a Firebase, y cómo su base de datos genera automáticamente una REST API. El video muestra cómo crear la cuenta y el proyecto, cómo crear una tabla y cargar datos, y cómo consultar esos datos desde un cliente REST.</p>
+      <p>También trata la seguridad: explica por qué no conviene dejar la API abierta y cómo las reglas RLS controlan el acceso.</p>
+    </div>
+  </details>
+
+  <details class="pregunta">
+    <summary>2. ¿Qué problema o necesidad tecnológica se aborda?</summary>
+    <div class="respuesta-texto">
+      <p>La necesidad es tener un backend (base de datos, usuarios, archivos y una API) sin programarlo desde cero. Supabase lo configura en unos tres minutos desde un panel, sin escribir código.</p>
+      <p>Otro problema que se aborda es la seguridad: si una aplicación usa la URL y la clave públicas, cualquiera podría obtenerlas desde el front-end y hacer operaciones de lectura, escritura o actualización. Para eso se usa RLS.</p>
+    </div>
+  </details>
+
+  <details class="pregunta">
+    <summary>3. ¿Cuáles son los cinco conceptos más importantes? Define cada uno.</summary>
+    <div class="respuesta-texto">
+      <ol>
+        <li><strong>Supabase:</strong> servicio en la nube, alternativa a Firebase, con base de datos, autenticación y almacenamiento.</li>
+        <li><strong>PostgreSQL:</strong> base de datos SQL donde se guardan los datos en tablas, filas y columnas.</li>
+        <li><strong>REST API:</strong> interfaz que se genera sola al crear una tabla y permite leer, escribir, actualizar y eliminar datos por HTTP.</li>
+        <li><strong>API key:</strong> clave (<em>anon public</em>) que se envía en las cabeceras <code>apikey</code> y <code>Authorization</code> para poder consultar la API.</li>
+        <li><strong>RLS (Row Level Security):</strong> reglas que se agregan sobre las tablas para decidir qué operaciones se permiten, según políticas.</li>
+      </ol>
+    </div>
+  </details>
+
+  <details class="pregunta">
+    <summary>4. ¿Qué herramientas, programas o tecnologías se mencionan y para qué sirven?</summary>
+    <div class="respuesta-texto">
+      <div class="tabla-scroll">
+        <table>
+          <thead><tr><th>Herramienta</th><th>Para qué sirve</th></tr></thead>
+          <tbody>
+            <tr><td>Supabase</td><td>Backend en la nube: base de datos, autenticación y Storage.</td></tr>
+            <tr><td>GitHub</td><td>Se usa para crear la cuenta e iniciar sesión en Supabase.</td></tr>
+            <tr><td>Panel: Database y Table editor</td><td>En Database se crean las tablas, y en Table editor se agregan y editan las filas.</td></tr>
+            <tr><td>PostgreSQL / PostgREST</td><td>La base de datos SQL y la herramienta que convierte sus tablas en una REST API.</td></tr>
+            <tr><td>Sección API del panel</td><td>Muestra la documentación de cada tabla, con ejemplos en Bash (cURL) y con la biblioteca cliente.</td></tr>
+            <tr><td>Postman y cURL</td><td>Probar las peticiones a la API sin crear una aplicación.</td></tr>
+            <tr><td>Autenticación y Storage</td><td>Iniciar sesión con usuario y contraseña, Magic Link u OAuth (Gmail, Microsoft). Storage guarda archivos en la nube.</td></tr>
+            <tr><td>Biblioteca de JavaScript</td><td>Usar Supabase desde una aplicación sin trabajar directamente con la REST API.</td></tr>
+            <tr><td>Templates y frameworks</td><td>Proyectos de ejemplo ya configurados con Supabase: Svelte, Next, React Native con Expo y JavaScript puro.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </details>
+
+  <details class="pregunta">
+    <summary>5. ¿Qué procedimientos o pasos se explican? Preséntalos en orden.</summary>
+    <div class="respuesta-texto">
+      <ol>
+        <li>Entrar a Supabase.com y registrarse con una cuenta de GitHub.</li>
+        <li>Crear un proyecto con <em>New project</em>: elegir el plan gratuito, poner un nombre y una contraseña.</li>
+        <li>Esperar unos tres minutos a que se configure el backend.</li>
+        <li>En <em>Database</em>, crear una tabla nueva (<code>products</code>) con una columna <code>name</code> de tipo VARCHAR y requerida.</li>
+        <li>En <em>Table editor</em>, insertar filas: laptop, monitor y mouse gaming.</li>
+        <li>En la sección <em>API</em>, abrir la tabla y copiar el endpoint de <em>Read rows</em> desde la pestaña Bash.</li>
+        <li>En Postman, hacer la petición. Sin clave da error; al agregar las cabeceras <code>apikey</code> y <code>Authorization</code> devuelve las tres filas.</li>
+        <li>Activar RLS (<em>Enable RLS</em>): la misma petición devuelve una lista vacía.</li>
+        <li>Crear una política nueva con la plantilla de lectura para todos: la petición vuelve a devolver los datos.</li>
+        <li>Probar un <code>POST</code>: da error, porque no hay una política que permita escribir.</li>
+      </ol>
+    </div>
+  </details>
+
+  <details class="pregunta">
+    <summary>6. ¿Qué ejemplos prácticos aparecen? Explica uno detalladamente.</summary>
+    <div class="respuesta-texto">
+      <p>El ejemplo principal es una tabla de productos (<code>products</code>), con tres filas: laptop, monitor y mouse gaming. Lo explico en el orden en que ocurre en el video:</p>
+      <p><strong>1. Crear la tabla.</strong> En Database se crea <code>products</code> con una descripción y una columna <code>name</code> (VARCHAR, sin permitir nulos). Supabase agrega solo <code>id</code> y <code>created_at</code>.</p>
+      <p><strong>2. Consultar la API.</strong> Se copia el endpoint de lectura y se envía desde Postman. Sin clave responde con un error que indica que falta la API key. Con las dos cabeceras responde con un arreglo de tres objetos, cada uno con nombre, id y fecha de creación. El equivalente en cURL es:</p>
+<pre>curl 'https://TU_PROYECTO.supabase.co/rest/v1/products?select=*' \
+  -H "apikey: TU_CLAVE_ANON" \
+  -H "Authorization: Bearer TU_CLAVE_ANON"</pre>
+      <p><strong>3. Activar RLS.</strong> Al activarlo, la misma petición no da error pero devuelve <code>[]</code>. Las credenciales son correctas, pero no existe ninguna regla que autorice la lectura.</p>
+      <p><strong>4. Crear la política.</strong> Con la plantilla «habilitar acceso de lectura para todos» la tabla vuelve a ser legible. La política equivale, en esencia, a:</p>
+<pre>create policy "Enable read access for all users"
+on products for select
+to public
+using (true);</pre>
+      <p><strong>5. Probar escribir.</strong> Un <code>POST</code> falla, y eso es lo esperado: la política solo permite leer.</p>
+    </div>
+  </details>
+
+  <details class="pregunta">
+    <summary>7. ¿Qué conocimientos previos son necesarios para comprender lo explicado?</summary>
+    <div class="respuesta-texto">
+      <ul>
+        <li>Qué es una base de datos, una tabla, una fila y una columna, y la diferencia entre bases SQL y NoSQL.</li>
+        <li>Qué es una API REST: URL, métodos HTTP (<code>GET</code>, <code>POST</code>) y cabeceras.</li>
+        <li>El formato JSON, porque la API responde con arreglos de objetos.</li>
+        <li>Haber visto Firebase u otro servicio similar, porque el autor lo compara varias veces.</li>
+        <li>Usar un cliente como Postman, o cURL si se sabe usar la consola.</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="pregunta">
+    <summary>8. ¿Qué ventajas o beneficios ofrece la tecnología o procedimiento?</summary>
+    <div class="respuesta-texto">
+      <ul>
+        <li><strong>No hace falta programar el backend:</strong> el proyecto se configura desde un panel, en unos tres minutos.</li>
+        <li><strong>La REST API se genera sola</strong> al crear cada tabla, con su documentación y ejemplos.</li>
+        <li><strong>Base de datos SQL (Postgres)</strong>, con tipos de datos variados.</li>
+        <li><strong>Todo en un solo lugar:</strong> base de datos, autenticación (usuario y contraseña, Magic Link, OAuth) y almacenamiento de archivos.</li>
+        <li><strong>Funciona con cualquier lenguaje o framework</strong> que pueda hacer peticiones HTTP, y también hay biblioteca para JavaScript y templates listos.</li>
+        <li><strong>Plan gratuito</strong> para empezar a probar.</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="pregunta">
+    <summary>9. ¿Qué dificultades, errores o precauciones deben considerarse?</summary>
+    <div class="respuesta-texto">
+      <ul>
+        <li><strong>Claves expuestas:</strong> si una aplicación usa solo la URL y la API key, cualquiera puede obtenerlas desde el front-end y hacer lecturas, escrituras o actualizaciones. Por eso no hay que confiar solo en la clave.</li>
+        <li><strong>RLS activado sin políticas:</strong> la API devuelve una lista vacía sin mostrar ningún error, y eso puede confundir.</li>
+        <li><strong>Las escrituras necesitan más control:</strong> la lectura puede ser pública (por ejemplo, los productos de una tienda), pero crear, actualizar y borrar deberían exigir un usuario autenticado y, a veces, un rol.</li>
+        <li><strong>Cabeceras correctas:</strong> falta de <code>apikey</code> da error, y <code>Authorization</code> debe llevar la palabra <code>Bearer</code> y un espacio antes de la clave.</li>
+        <li><strong>Confusión inicial en el panel:</strong> las tablas se crean en Database, pero las filas se editan en Table editor.</li>
+        <li><strong>Tiempo de creación:</strong> el proyecto tarda unos tres minutos en estar listo, algo más que en Firebase.</li>
+      </ul>
+    </div>
+  </details>
+
+  <details class="pregunta">
+    <summary>10. ¿Cómo aplicarías lo aprendido en un proyecto informático real?</summary>
+    <div class="respuesta-texto">
+      <p>Lo usaría para un sistema de inventario de equipos de un laboratorio de informática, parecido al ejemplo de productos. Crearía una tabla <code>equipos</code> con nombre, estado y ubicación, y una página con HTML, CSS y JavaScript que liste los equipos con una petición <code>GET</code>.</p>
+      <p>Siguiendo lo del video, activaría RLS: dejaría la lectura pública mediante una política, y permitiría crear, modificar o borrar equipos solo a usuarios autenticados.</p>
+    </div>
+  </details>
+
+  <details class="pregunta">
+    <summary>11. ¿Qué parte del video consideras más importante y por qué?</summary>
+    <div class="respuesta-texto">
+      <p>Considero más importante la parte de RLS. Primero el autor muestra que con la clave se leen los datos, y después advierte que esa clave puede verla cualquiera en el front-end. Al activar RLS, la misma petición devuelve una lista vacía, y con la política vuelve a funcionar.</p>
+      <p>Me parece clave porque enseña que una API que funciona no es lo mismo que una API segura.</p>
+    </div>
+  </details>
+
+  <details class="pregunta">
+    <summary>12. ¿Qué conocimientos nuevos adquiriste y cómo los explicarías a otra persona?</summary>
+    <div class="respuesta-texto">
+      <p>Aprendí que al crear una tabla en Supabase se genera automáticamente una REST API, que se prueba con Postman usando dos cabeceras, y que la seguridad se maneja con RLS y políticas.</p>
+      <p>Se lo explicaría así: «Supabase es como Firebase, pero con una base de datos de tablas. Cuando creás una tabla, ya tenés una dirección web para pedir sus datos. Esa dirección pide una clave, y además podés poner reglas que dicen quién puede leer o escribir».</p>
+    </div>
+  </details>
+</section>
+
+<!-- ============ APLICACIÓN PRÁCTICA ============ -->
+<section id="aplicacion">
+  <h2>Aplicación práctica</h2>
+  <p>Este es el mismo procedimiento del video (la petición de lectura que se hace en Postman), pero hecho desde una página web con JavaScript. Así la lista de productos se muestra en la propia página.</p>
+<pre>const URL_API = "https://TU_PROYECTO.supabase.co/rest/v1/products?select=*";
+const CLAVE = "TU_CLAVE_ANON";
+
+async function mostrarProductos() {
+  const respuesta = await fetch(URL_API, {
+    headers: {
+      apikey: CLAVE,
+      Authorization: "Bearer " + CLAVE
+    }
+  });
+  const productos = await respuesta.json();
+  productos.forEach(p => console.log(p.name));
+}
+
+mostrarProductos();</pre>
+  <p>Para que esto devuelva datos, la tabla necesita una política de lectura (paso 9 del procedimiento). Con RLS activado y sin política, el resultado sería una lista vacía.</p>
+
+  <h3>Operaciones sobre la tabla</h3>
+  <div class="tabla-scroll">
+    <table>
+      <thead><tr><th>Operación</th><th>Método HTTP</th><th>En el video</th></tr></thead>
+      <tbody>
+        <tr><td>Leer filas</td><td><code>GET</code></td><td>Sí: con y sin clave, y con RLS activado</td></tr>
+        <tr><td>Crear fila</td><td><code>POST</code></td><td>Sí: falla porque no hay política de escritura</td></tr>
+        <tr><td>Actualizar</td><td><code>PATCH</code></td><td>Aparece en la documentación de la sección API</td></tr>
+        <tr><td>Eliminar</td><td><code>DELETE</code></td><td>Aparece en la documentación de la sección API</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Filtros disponibles</h3>
+  <p>La sección API también documenta filtros para las consultas. Permiten pedir solo las filas que cumplan una condición:</p>
+  <ul>
+    <li>si un valor es igual a otro;</li>
+    <li>si es mayor o menor;</li>
+    <li>si es mayor o igual, o menor o igual;</li>
+    <li>si un texto se parece o se incluye, o si no se parece.</li>
+  </ul>
+</section>
+
+<!-- ============ RECURSOS VISUALES ============ -->
+<section id="recursos">
+  <h2>Recursos visuales</h2>
+  <figure>
+    <svg viewBox="0 0 760 170" role="img" aria-labelledby="titulo-diagrama descr-diagrama">
+      <title id="titulo-diagrama">Flujo de una petición a Supabase</title>
+      <desc id="descr-diagrama">Una aplicación cliente envía una petición HTTP con su API key a la REST API de Supabase, que pasa por PostgREST y las reglas RLS antes de consultar la base de datos PostgreSQL. La respuesta vuelve en JSON.</desc>
+      <defs>
+        <marker id="flecha" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+          <path d="M0,0 L10,5 L0,10 z" fill="#10231e"/>
+        </marker>
+      </defs>
+      <g font-family="IBM Plex Sans, Arial, sans-serif" font-size="15" fill="#10231e" text-anchor="middle">
+        <rect x="10" y="45" width="150" height="70" rx="8" fill="#e3ebe7" stroke="#10231e"/>
+        <text x="85" y="76">Cliente</text>
+        <text x="85" y="97" font-size="13">Postman o web</text>
+
+        <rect x="210" y="45" width="150" height="70" rx="8" fill="#e3ebe7" stroke="#10231e"/>
+        <text x="285" y="76">REST API</text>
+        <text x="285" y="97" font-size="13">apikey + Bearer</text>
+
+        <rect x="410" y="45" width="150" height="70" rx="8" fill="#e3ebe7" stroke="#10231e"/>
+        <text x="485" y="76">PostgREST</text>
+        <text x="485" y="97" font-size="13">+ reglas RLS</text>
+
+        <rect x="610" y="45" width="140" height="70" rx="8" fill="#1a8a5f" stroke="#10231e"/>
+        <text x="680" y="76" fill="#ffffff">PostgreSQL</text>
+        <text x="680" y="97" font-size="13" fill="#ffffff">tabla products</text>
+
+        <line x1="160" y1="80" x2="208" y2="80" stroke="#10231e" stroke-width="2" marker-end="url(#flecha)"/>
+        <line x1="360" y1="80" x2="408" y2="80" stroke="#10231e" stroke-width="2" marker-end="url(#flecha)"/>
+        <line x1="560" y1="80" x2="608" y2="80" stroke="#10231e" stroke-width="2" marker-end="url(#flecha)"/>
+        <text x="380" y="150" font-size="13">La respuesta vuelve por el mismo camino, en JSON. Sin política RLS, vuelve vacía.</text>
+      </g>
+    </svg>
+    <figcaption>Diagrama: recorrido de una petición desde el cliente hasta la base de datos.</figcaption>
+  </figure>
+
+  <!-- Captura opcional: guardar la imagen junto a index.html, quitar los marcadores de comentario y ajustar el nombre del archivo en src.
+  <figure>
+    <img src="captura-tabla.png" alt="Table editor de Supabase con la tabla products y tres filas" style="max-width:100%;height:auto;">
+    <figcaption>Tabla products con laptop, monitor y mouse gaming.</figcaption>
+  </figure>
+  -->
+</section>
+
+<!-- ============ CONCLUSIÓN ============ -->
+<section id="conclusion">
+  <h2>Conclusión personal</h2>
+  <p>Este video me mostró que se puede tener un backend completo sin programarlo desde cero. En pocos minutos pasé de una cuenta vacía a una tabla con datos y una API que cualquier aplicación puede consultar.</p>
+  <p>Lo que más me quedó es que la comodidad exige cuidado: una clave pública en el front-end puede ser vista por cualquiera, y por eso las reglas RLS son indispensables. Esto me sirve para mis proyectos de la materia, porque puedo guardar datos reales en mis páginas web y publicarlas con una base de datos en línea.</p>
+</section>
+
+<!-- ============ FUENTES ============ -->
+<section id="fuentes">
+  <h2>Fuentes</h2>
+  <ul>
+    <li>Fazt Code. <em>Supabase, Tutorial Práctico y Overview (REST API)</em>. YouTube: <a href="https://www.youtube.com/watch?v=pi33WDrgfpI" target="_blank" rel="noopener">https://www.youtube.com/watch?v=pi33WDrgfpI</a></li>
+  </ul>
+</section>
+
+</main>
+
+<footer>
+  <p>Trabajo práctico individual · Colegio Nacional EMD Asunción Escalada · Software / Desarrollo Web</p>
+  <p><a href="#inicio">Volver arriba</a></p>
+</footer>
+
+</body>
+</html>
